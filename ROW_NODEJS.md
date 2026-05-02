@@ -110,7 +110,22 @@ server.listen(3000);
     };
 
 8.  Setting Up a Fake JSON Database
+    {
+    "users": []
+    }
+    import fs from "fs";
 
-9.  Handling Dynamic Routes
+const DB_FILE = "./db.json";
+
+export const readDB = () => {
+const data = fs.readFileSync(DB_FILE, "utf-8");
+return JSON.parse(data);
+};
+
+export const writeDB = (data: any) => {
+fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+};
+
+9. Handling Dynamic Routes
 
 10. Dynamic Route Handling for PUT Requests
