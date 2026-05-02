@@ -28,4 +28,33 @@ console.log(`Server is running on http://localhost:${PORT}`);
 
 const PORT = process.env.PORT || 3000;
 
-console.log("Running on port:", PORT); 3. API Routes & the Difference Between GET and POST 4. Creating a Custom Router 5. Using Our Custom Route Handler 6. Implementing sendJson & Cleaning Up Server.ts 7. Creating parseBody & Building a Clean POST API 8. Setting Up a Fake JSON Database 9. Handling Dynamic Routes 10. Dynamic Route Handling for PUT Requests
+console.log("Running on port:", PORT);
+
+3. API Routes & the Difference Between GET and POST
+   import http from "http";
+
+const server = http.createServer((req, res) => {
+if (req.method === "GET" && req.url === "/users") {
+res.end("Get all users");
+}
+
+if (req.method === "POST" && req.url === "/users") {
+res.end("Create user");
+}
+});
+
+server.listen(3000);
+
+4. Creating a Custom Router
+
+5. Using Our Custom Route Handler
+
+6. Implementing sendJson & Cleaning Up Server.ts
+
+7. Creating parseBody & Building a Clean POST API
+
+8. Setting Up a Fake JSON Database
+
+9. Handling Dynamic Routes
+
+10. Dynamic Route Handling for PUT Requests
