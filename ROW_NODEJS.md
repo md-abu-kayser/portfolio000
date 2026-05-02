@@ -83,16 +83,34 @@ const server = http.createServer(handleRoute);
 
 server.listen(3000);
 
-6. Implementing sendJson & Cleaning Up Server.ts
-   export const sendJson = (res: any, data: any, status = 200) => {
-   res.writeHead(status, { "Content-Type": "application/json" });
-   res.end(JSON.stringify(data));
-   };
+6.  Implementing sendJson & Cleaning Up Server.ts
+    export const sendJson = (res: any, data: any, status = 200) => {
+    res.writeHead(status, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(data));
+    };
 
-7. Creating parseBody & Building a Clean POST API
+7.  Creating parseBody & Building a Clean POST API
+    export const parseBody = (req: any): Promise<any> => {
+    return new Promise((resolve, reject) => {
+    let body = "";
 
-8. Setting Up a Fake JSON Database
+        req.on("data", (chunk: any) => {
+          body += chunk;
+        });
 
-9. Handling Dynamic Routes
+        req.on("end", () => {
+          try {
+            resolve(JSON.parse(body));
+          } catch {
+            resolve({});
+          }
+        });
+
+    });
+    };
+
+8.  Setting Up a Fake JSON Database
+
+9.  Handling Dynamic Routes
 
 10. Dynamic Route Handling for PUT Requests
