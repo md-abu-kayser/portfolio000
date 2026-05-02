@@ -127,5 +127,18 @@ fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
 };
 
 9. Handling Dynamic Routes
+   const matchRoute = (url: string) => {
+   const match = url.match(/^\/users\/(\d+)$/);
+   return match ? match[1] : null;
+   };
+
+const userId = matchRoute(req.url);
+
+if (req.method === "GET" && userId) {
+const db = readDB();
+const user = db.users.find((u: any) => u.id == userId);
+
+sendJson(res, user || { message: "User not found" });
+}
 
 10. Dynamic Route Handling for PUT Requests
