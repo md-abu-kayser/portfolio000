@@ -68,6 +68,21 @@ res.end("Not Found");
 
 5. Using Our Custom Route Handler
 
+import http from "http";
+import { addRoute, handleRoute } from "./router";
+
+addRoute("GET", "/users", (req, res) => {
+res.end("All users");
+});
+
+addRoute("POST", "/users", (req, res) => {
+res.end("User created");
+});
+
+const server = http.createServer(handleRoute);
+
+server.listen(3000);
+
 6. Implementing sendJson & Cleaning Up Server.ts
 
 7. Creating parseBody & Building a Clean POST API
