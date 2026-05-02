@@ -46,6 +46,25 @@ res.end("Create user");
 server.listen(3000);
 
 4. Creating a Custom Router
+   type Handler = (req: any, res: any) => void;
+
+const routes: Record<string, Handler> = {};
+
+export const addRoute = (method: string, path: string, handler: Handler) => {
+routes[`${method}:${path}`] = handler;
+};
+
+export const handleRoute = (req: any, res: any) => {
+const key = `${req.method}:${req.url}`;
+const handler = routes[key];
+
+if (handler) {
+handler(req, res);
+} else {
+res.statusCode = 404;
+res.end("Not Found");
+}
+};
 
 5. Using Our Custom Route Handler
 
