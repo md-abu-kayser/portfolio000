@@ -142,3 +142,19 @@ sendJson(res, user || { message: "User not found" });
 }
 
 10. Dynamic Route Handling for PUT Requests
+    if (req.method === "PUT" && userId) {
+    const body = await parseBody(req);
+    const db = readDB();
+
+const index = db.users.findIndex((u: any) => u.id == userId);
+
+if (index === -1) {
+return sendJson(res, { message: "User not found" }, 404);
+}
+
+db.users[index] = { ...db.users[index], ...body };
+
+writeDB(db);
+
+sendJson(res, db.users[index]);
+}
