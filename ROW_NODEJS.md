@@ -84,6 +84,10 @@ const server = http.createServer(handleRoute);
 server.listen(3000);
 
 6. Implementing sendJson & Cleaning Up Server.ts
+   export const sendJson = (res: any, data: any, status = 200) => {
+   res.writeHead(status, { "Content-Type": "application/json" });
+   res.end(JSON.stringify(data));
+   };
 
 7. Creating parseBody & Building a Clean POST API
 
